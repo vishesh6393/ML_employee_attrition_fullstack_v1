@@ -14,6 +14,8 @@ A machine learning project built while learning ML. The goal is to predict wheth
 - Trained Logistic Regression models
 - Tuned hyperparameters using GridSearchCV
 - Evaluated using Accuracy, Precision, Recall, F1-score
+- Built a FastAPI backend with `/predict` endpoint
+- Built a React frontend with a form to predict attrition
 
 ## Tech Stack
 
@@ -22,38 +24,72 @@ A machine learning project built while learning ML. The goal is to predict wheth
 - scikit-learn
 - uv (package manager)
 - Jupyter Notebook
+- FastAPI + Uvicorn
+- React
 
 ## Project Structure
 
 ```
 employee-attrition-ml/
-├── data/                        # Dataset goes here (not tracked)
+├── data/                             # Dataset goes here (not tracked)
 ├── notebooks/
-│   └── 02_optimized_logistic.ipynb   # Main notebook
+│   └── 02_optimized_logistic.ipynb  # Main notebook
 ├── models/
-│   └── best_model.pkl           # Saved trained model
-├── src/                         # Source code (coming soon)
-├── main.py
+│   └── best_model.pkl               # Saved trained model
+├── src/
+│   └── schema.py                    # Pydantic input schema
+├── frontend/                        # React frontend
+├── main.py                          # FastAPI app
 ├── pyproject.toml
 └── README.md
 ```
 
 ## How to Run
 
+### 1. Clone and setup
+
 ```bash
-# Clone the repo
 git clone <your-repo-url>
 cd employee-attrition-ml
+```
 
-# Install dependencies
+### 2. Install Python dependencies
+
+```bash
 uv sync
+```
 
-# Download the dataset from Kaggle and place it in data/
-# https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
+### 3. Download dataset
 
-# Open the notebook
+Download from Kaggle and place in `data/`:
+https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
+
+### 4. Run the notebook (optional)
+
+```bash
 uv run jupyter notebook
 ```
+
+### 5. Run the backend
+
+```bash
+uv run uvicorn main:app --reload
+```
+
+API runs at `http://127.0.0.1:8000`
+Swagger docs at `http://127.0.0.1:8000/docs`
+
+### 6. Run the frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+Frontend runs at `http://localhost:3000`
+
+---
 
 ## Status
 
@@ -61,5 +97,7 @@ uv run jupyter notebook
 - [x] Preprocessing pipeline
 - [x] Logistic Regression model
 - [x] Hyperparameter tuning
-- [ ] Backend API (FastAPI) — coming soon
-- [ ] Frontend — coming soon
+- [x] FastAPI backend with `/predict` endpoint
+- [x] React frontend
+- [ ] Feature selection & model retraining
+- [ ] Deploy to cloud
