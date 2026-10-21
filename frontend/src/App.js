@@ -119,7 +119,7 @@ function App() {
     setResult(null);
     setError(null);
     try {
-      const res = await fetch("http://127.0.0.1:8000/predict", {
+      const res = await fetch("https://employee-attrition-api-zf98.onrender.com/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
