@@ -1,0 +1,22 @@
+# Virtual environment
+.venv/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Original notebook (keep local only)
+notebooks/01_data_understanding.ipynb
+
+# Dataset (too large for GitHub)
+data/*.csv
+
+# OS files
+.DS_Store
+
+# Excel files
+*.xlsx
