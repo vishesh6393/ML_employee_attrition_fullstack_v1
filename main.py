@@ -16,7 +16,7 @@ app.add_middleware(
 model = joblib.load("models/best_model.pkl")
 
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 def root():
     return {"message": "Employee Attrition API is running"}
 
