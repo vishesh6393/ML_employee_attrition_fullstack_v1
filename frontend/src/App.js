@@ -175,6 +175,22 @@ function App() {
         <div className={`result ${result.attrition === "Yes" ? "yes" : "no"}`}>
           <h2>Prediction: {result.attrition === "Yes" ? "⚠️ Will Leave" : "✅ Will Stay"}</h2>
           <p>Probability of Leaving: <strong>{(result.probability_of_leaving * 100).toFixed(1)}%</strong></p>
+
+          {result.top_reasons && result.top_reasons.length > 0 && (
+            <div className="reasons">
+              <h3>Top Factors</h3>
+              <ul>
+                {result.top_reasons.map((r, i) => (
+                  <li key={i} className={r.impact > 0 ? "up" : "down"}>
+                    <span className="reason-feature">{r.feature}</span>
+                    <span className="reason-direction">
+                      {r.impact > 0 ? "+" : "-"}{r.impact_pct}% {r.impact > 0 ? "↑ increases risk" : "↓ decreases risk"}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
     </div>
