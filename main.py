@@ -18,9 +18,8 @@ app.add_middleware(
 model = joblib.load("models/best_model.pkl")
 preprocessor = model.named_steps["preprocessor"]
 classifier = model.named_steps["classifier"]
-explainer = shap.LinearExplainer(classifier, shap.maskers.Independent(preprocessor.transform(
-    pd.read_csv("data/WA_Fn-UseC_-HR-Employee-Attrition.csv").drop(columns=["Attrition"])
-)))
+n_features = sum(len(t[1].get_feature_names_out()) if hasattr(t[1], 'get_feature_names_out') else len(t[2]) for t in preprocessor.transformers_)
+explainer = shap.LinearExplainer(classifier, np.zeros((1, n_features)))
 
 
 @app.api_route("/", methods=["GET", "HEAD"])
